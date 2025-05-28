@@ -350,7 +350,7 @@ class NativeQueryEditor extends Component<Props, NativeQueryEditorState> {
         ref={forwardedRef}
       >
         {hasTopBar && (
-          <Flex align="center" data-testid="native-query-top-bar">
+          <Flex align="flex-start" data-testid="native-query-top-bar">
             {canChangeDatabase && (
               <DataSourceSelectors
                 isNativeEditorOpen={isNativeEditorOpen}
@@ -372,7 +372,7 @@ class NativeQueryEditor extends Component<Props, NativeQueryEditorState> {
                 enableParameterRequiredBehavior
               />
             )}
-            <Flex ml="auto" gap="lg" mr="lg">
+            <Flex ml="auto" gap="lg" mr="lg" mt="md">
               {isNativeEditorOpen && hasEditingSidebar && !readOnly && (
                 <NativeQueryEditorSidebar
                   features={sidebarFeatures}
