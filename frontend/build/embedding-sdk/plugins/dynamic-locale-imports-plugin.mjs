@@ -6,8 +6,7 @@ import glob from "glob";
 const DYNAMIC_IMPORT_LOCALE_REGEX = /\bimport\((.*?)\)/g;
 const DYNAMIC_IMPORT_LOCALE_FUNCTION_NAME = "mb_importLocale";
 
-const normalizeLocaleName = (localeName) =>
-  localeName.replace(/_/g, "-").toLocaleLowerCase();
+const normalizeLocaleName = (localeName) => localeName.toLocaleLowerCase();
 
 /**
  * By default esbuild can handle dynamic imports starting from `./` or `../`.
@@ -118,7 +117,7 @@ export const dynamicLocaleImportsPlugin = ({
             }` + adjustedContent;
         }
 
-        return dynamicImportIndex === -1 ? null : { contents, loader: "js" };
+        return dynamicImportIndex === -1 ? null : { contents, loader: "ts" };
       });
     },
   };

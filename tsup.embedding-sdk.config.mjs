@@ -203,7 +203,7 @@ await build({
     }),
     dynamicLocaleImportsPlugin({
       basePath: ROOT_PATH,
-      filter: /i18n\.js$/,
+      filter: /embedding-sdk\/lib\/i18n\/.*$/,
       libraryLocalePaths: [
         "moment/dist/locale",
         "moment/locale",
