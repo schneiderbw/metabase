@@ -153,6 +153,10 @@ await build({
       e2e: E2E_PATH,
       style: ROOT_CSS_FILE_PATH,
       "sdk-ee-plugins": path.join(ENTERPRISE_SRC_PATH, "sdk-plugins"),
+      "sdk-specific-imports": path.join(
+        SDK_SRC_PATH,
+        "/lib/sdk-specific-imports.ts",
+      ),
       "ee-overrides": path.join(ENTERPRISE_SRC_PATH, "overrides"),
       "embedding-sdk": SDK_SRC_PATH,
     };
