@@ -57,15 +57,15 @@ export function useTableEditingUndoRedo({
                 : t`Nothing to redo`,
           }),
         );
-      } else if (response.data?.result?.[tableId]) {
-        const operations = response.data?.result?.[tableId].reduce(
-          (acc, [operationType, row]) => {
-            if (operationType === "create") {
-              acc.created.push(row);
-            } else if (operationType === "update") {
-              acc.updated.push(row);
-            } else if (operationType === "delete") {
-              acc.deleted.push(row);
+      } else if (response.data?.outputs) {
+        const operations = response.data?.outputs.reduce(
+          (acc, output) => {
+            if (output["action-type"] === "create") {
+              acc.created.push(output.row);
+            } else if (output["action-type"] === "update") {
+              acc.updated.push(output.row);
+            } else if (output["action-type"] === "delete") {
+              acc.deleted.push(output.row);
             }
 
             return acc;
@@ -88,7 +88,7 @@ export function useTableEditingUndoRedo({
         }
       }
     },
-    [dispatch, stateUpdateStrategy, tableId],
+    [dispatch, stateUpdateStrategy],
   );
   const undo = useCallback(async () => {
     const response = await undoMutation({ tableId, scope });

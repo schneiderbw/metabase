@@ -56,18 +56,14 @@ export type UpdatedRowHandlerParams = {
 export type TableUndoRedoRequest = {
   tableId: ConcreteTableId;
   scope?: TableEditingScope;
-
-  /**
-   * When true, the API will only return the batch number of the next undo operation
-   * without actually performing the undo. This is useful for checking if an undo operation
-   * is available before attempting it.
-   */
-  noOp?: boolean;
 };
 
 export type TableOperation = [string, Record<string, RowValue>];
 
 export type TableUndoRedoResponse = {
-  batch_num?: number;
-  result?: Record<ConcreteTableId, TableOperation[]>;
+  outputs?: {
+    "action-type": "create" | "update" | "delete";
+    row: RowCellsWithPkValue;
+    "table-id": TableId;
+  }[];
 };
