@@ -1,15 +1,20 @@
 import type { MetabaseTheme } from "embedding-sdk";
 
 /** Events that the embed.js script listens for */
-export type SdkIframeEmbedTagMessage = {
-  type: "metabase.embed.iframeReady";
-};
+export type SdkIframeEmbedTagMessage =
+  | { type: "metabase.embed.iframeReady" }
+  | { type: "metabase.embed.requestRefreshToken" };
 
 /** Events that the sdk embed route listens for */
-export type SdkIframeEmbedMessage = {
-  type: "metabase.embed.setSettings";
-  data: SdkIframeEmbedSettings;
-};
+export type SdkIframeEmbedMessage =
+  | {
+      type: "metabase.embed.setSettings";
+      data: SdkIframeEmbedSettings;
+    }
+  | {
+      type: "metabase.embed.submitRequestToken";
+      data: { refreshToken: string };
+    };
 
 /** Template to use for the embedded question or dashboard. Will be expanded in the future. */
 export type SdkIframeEmbedTemplate = "exploration";
