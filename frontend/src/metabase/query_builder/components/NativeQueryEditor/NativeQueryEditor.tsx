@@ -426,21 +426,20 @@ class NativeQueryEditor extends Component<Props, NativeQueryEditorState> {
           }}
         >
           <>
-            <CodeMirrorEditor
-              ref={this.editor}
-              query={question.query()}
-              readOnly={readOnly}
-              highlightedLineNumbers={highlightedLineNumbers}
-              onChange={this.onChange}
-              onRunQuery={runQuery}
-              onSelectionChange={setNativeEditorSelectedRange}
-              onCursorMoveOverCardTag={openDataReferenceAtQuestion}
-              onRightClickSelection={this.handleRightClickSelection}
-            />
+            <Flex w="100%" className={S.queryEditorContent}>
+              <CodeMirrorEditor
+                ref={this.editor}
+                query={question.query()}
+                readOnly={readOnly}
+                highlightedLineNumbers={highlightedLineNumbers}
+                onChange={this.onChange}
+                onRunQuery={runQuery}
+                onSelectionChange={setNativeEditorSelectedRange}
+                onCursorMoveOverCardTag={openDataReferenceAtQuestion}
+                onRightClickSelection={this.handleRightClickSelection}
+              />
 
-            {hasEditingSidebar &&
-              !readOnly &&
-              !this.state.queryValidationError && (
+              {hasEditingSidebar && !readOnly && (
                 <NativeQueryEditorRunButton
                   cancelQuery={this.props.cancelQuery}
                   isResultDirty={this.props.isResultDirty}
@@ -450,17 +449,13 @@ class NativeQueryEditor extends Component<Props, NativeQueryEditorState> {
                   runQuery={this.props.runQuery}
                 />
               )}
-
+            </Flex>
             {this.state.queryValidationError &&
               this.state.queryValidationError.length > 0 && (
                 <Flex
-                  pos="absolute"
-                  bottom="15px"
-                  w="calc(100% - 5.5rem)"
-                  p="md"
+                  p="sm"
                   data-testid="query-validation-error"
                   className={S.queryErrorContainer}
-                  ml="lg"
                 >
                   <Icon name="warning" c="error" mr="sm" />
                   <Box component="ul" m={0} p={0} style={{ listStyle: "none" }}>
