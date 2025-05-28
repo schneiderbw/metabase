@@ -9,6 +9,7 @@ import { MetabaseProvider } from "embedding-sdk/components/public/MetabaseProvid
 import { PLUGIN_EMBEDDING_IFRAME_SDK } from "metabase/plugins";
 import { Box } from "metabase/ui";
 
+import { useRequestRefreshTokenFromEmbedJs } from "../hooks/use-request-refresh-token";
 import { useSdkIframeEmbedEventBus } from "../hooks/use-sdk-iframe-embed-event-bus";
 import type { SdkIframeEmbedSettings } from "../types/embed";
 
@@ -19,6 +20,7 @@ import {
 
 export const SdkIframeEmbedRoute = () => {
   const { embedSettings } = useSdkIframeEmbedEventBus();
+  const { requestRefreshToken } = useRequestRefreshTokenFromEmbedJs();
 
   // The embed settings won't be available until the parent sends it via postMessage.
   // The SDK will show its own loading indicator, so we don't need to show it twice.
@@ -44,6 +46,7 @@ export const SdkIframeEmbedRoute = () => {
   const authConfig = defineMetabaseAuthConfig({
     metabaseInstanceUrl: embedSettings.instanceUrl,
     apiKey: embedSettings.apiKey,
+    fetchRequestToken: requestRefreshToken,
   });
 
   return (

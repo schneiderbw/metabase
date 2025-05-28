@@ -1,4 +1,5 @@
 import type { MetabaseTheme } from "embedding-sdk";
+import type { UserBackendJwtResponse } from "embedding-sdk/types/refresh-token";
 
 /** Events that the embed.js script listens for */
 export type SdkIframeEmbedTagMessage =
@@ -13,7 +14,7 @@ export type SdkIframeEmbedMessage =
     }
   | {
       type: "metabase.embed.submitRequestToken";
-      data: { refreshToken: string };
+      data: { refreshToken: UserBackendJwtResponse };
     };
 
 /** Template to use for the embedded question or dashboard. Will be expanded in the future. */
